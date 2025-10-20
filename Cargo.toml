@@ -6,10 +6,10 @@ edition = "2024"
 [dependencies]
 
 [[bin]]
-name = "ktroll-client"
+name = "ktroller"
 path = "src/bin/client.rs"
 
 
 [[bin]]
-name = "ktroll-server"
+name = "ktrolled"
 path = "src/bin/server.rs"
