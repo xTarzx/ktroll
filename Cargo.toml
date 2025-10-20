@@ -1,0 +1,15 @@
+[package]
+name = "ktroll"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+
+[[bin]]
+name = "ktroll-client"
+path = "src/bin/client.rs"
+
+
+[[bin]]
+name = "ktroll-server"
+path = "src/bin/server.rs"
