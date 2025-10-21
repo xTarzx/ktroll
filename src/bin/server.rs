@@ -76,9 +76,9 @@ async fn main() -> anyhow::Result<()> {
         //
         //println!("ENIGO_KEY: {:?}", key);
         //
-        //if let Some(key) = key {
-        //    enigo.key(key, dir).unwrap();
-        //}
+        if let Some(key) = key {
+            enigo.key(key, dir).unwrap();
+        }
     }
 
     Ok(())
