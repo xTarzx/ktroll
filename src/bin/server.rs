@@ -1,8 +1,5 @@
 use bincode;
-use enigo::{
-    Direction,
-    Enigo, Key, Keyboard, Settings,
-};
+use enigo::{Direction, Enigo, Key, Keyboard, Settings};
 use ktroll::{KeyEvent, KeyEventType};
 use tokio::{io::AsyncReadExt, net::TcpListener};
 
@@ -45,8 +42,34 @@ async fn main() -> anyhow::Result<()> {
         };
 
         let key = match key_event.key.as_str() {
-            "KeyA" => Some(Key::Unicode('A')),
+            "KeyA" => Some(Key::Unicode('a')),
+            "KeyB" => Some(Key::Unicode('b')),
+            "KeyC" => Some(Key::Unicode('c')),
+            "KeyD" => Some(Key::Unicode('d')),
+            "KeyE" => Some(Key::Unicode('e')),
+            "KeyF" => Some(Key::Unicode('f')),
+            "KeyG" => Some(Key::Unicode('g')),
+            "KeyH" => Some(Key::Unicode('h')),
+            "KeyI" => Some(Key::Unicode('i')),
+            "KeyJ" => Some(Key::Unicode('j')),
+            "KeyK" => Some(Key::Unicode('k')),
+            "KeyL" => Some(Key::Unicode('l')),
+            "KeyM" => Some(Key::Unicode('m')),
+            "KeyN" => Some(Key::Unicode('n')),
+            "KeyO" => Some(Key::Unicode('o')),
+            "KeyP" => Some(Key::Unicode('p')),
+            "KeyQ" => Some(Key::Unicode('q')),
+            "KeyR" => Some(Key::Unicode('r')),
+            "KeyS" => Some(Key::Unicode('s')),
+            "KeyT" => Some(Key::Unicode('t')),
+            "KeyU" => Some(Key::Unicode('u')),
+            "KeyV" => Some(Key::Unicode('v')),
+            "KeyW" => Some(Key::Unicode('w')),
+            "KeyX" => Some(Key::Unicode('x')),
+            "KeyY" => Some(Key::Unicode('y')),
+            "KeyZ" => Some(Key::Unicode('z')),
             "Space" => Some(Key::Space),
+            "ShiftLeft" => Some(Key::LShift),
             _ => None,
         };
 
