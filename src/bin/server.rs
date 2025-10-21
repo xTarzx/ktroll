@@ -49,6 +49,8 @@ async fn main() -> anyhow::Result<()> {
             _ => None,
         };
 
+        println!("ENIGO_KEY: {:?}", key);
+
         if let Some(key) = key {
             enigo.key(key, dir).unwrap();
         }
