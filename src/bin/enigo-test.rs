@@ -9,9 +9,9 @@ fn main() {
     println!("starting in 5 seconds");
     thread::sleep(time::Duration::from_seconds(5));
 
-    enigo.key(Direction::KeyPress, Key::Shift);
-    enigo.key(Direction::KeyPress, Key::Unicode('a'));
-    enigo.key(Direction::KeyRelease, Key::Unicode('a'));
-    enigo.key(Direction::KeyRelease, Key::Shift);
+    enigo.key(Key::Shift, Direction::KeyPress);
+    enigo.key( Key::Unicode('a'), Direction::KeyPress);
 
+    enigo.key(Key::Shift, Direction::KeyRelease);
+    enigo.key( Key::Unicode('a'), Direction::KeyRelease);
 }
