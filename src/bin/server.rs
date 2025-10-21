@@ -45,7 +45,7 @@ async fn main() -> anyhow::Result<()> {
         };
 
         let key = match key_event.key.as_str() {
-            "KeySpace" => Some(Key::Space),
+            "Space" => Some(Key::Space),
             _ => None,
         };
 
