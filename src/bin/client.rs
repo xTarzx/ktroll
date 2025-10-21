@@ -21,7 +21,7 @@ async fn main() -> anyhow::Result<()> {
 
             println!("len: {}", len);
 
-            let _ = stream.write_u32(len as u32);
+            let _ = stream.write_u32(len as u32).await;
             let _ = stream.write_all(&buf[..len]).await;
             let _ = stream.flush();
         }
