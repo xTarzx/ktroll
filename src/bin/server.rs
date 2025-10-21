@@ -69,7 +69,7 @@ async fn main() -> anyhow::Result<()> {
             "KeyY" => Some(Key::Unicode('y')),
             "KeyZ" => Some(Key::Unicode('z')),
             "Space" => Some(Key::Space),
-            "ShiftLeft" => Some(Key::LShift),
+            "ShiftLeft" => Some(Key::Shift),
             _ => None,
         };
 
