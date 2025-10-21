@@ -7,7 +7,7 @@ fn main() {
     let mut enigo = Enigo::new(&Settings::default()).unwrap();
 
     println!("starting in 5 seconds");
-    thread::sleep(time::Duration::from_seconds(5));
+    thread::sleep(time::Duration::from_secs(5));
 
     enigo.key(Key::Shift, Direction::Press);
     enigo.key( Key::Unicode('a'), Direction::Press);
