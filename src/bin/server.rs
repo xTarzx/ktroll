@@ -7,6 +7,8 @@ use tokio::{io::AsyncReadExt, net::TcpListener};
 async fn main() -> anyhow::Result<()> {
     let listener = TcpListener::bind("0.0.0.0:46969").await?;
 
+    println!("waiting for connection");
+
     let (mut socket, addr) = listener.accept().await?;
 
     println!("connection from {}", addr);
@@ -14,12 +16,13 @@ async fn main() -> anyhow::Result<()> {
     //let mut enigo = Enigo::new(&Settings::default()).unwrap();
 
     loop {
-        let mut len_buf = [0u8; 4];
-        if socket.read_exact(&mut len_buf).await.is_err() {
-            break;
-        }
+        let len = socket.read_u32().await;
 
-        let len = u32::from_be_bytes(len_buf) as usize;
+        if len.is_err() {
+            break;
+        };
+
+        let len = len.unwrap() as usize;
 
         println!("len: {}", len);
         let mut payload = vec![0u8; len];
