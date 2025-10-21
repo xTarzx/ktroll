@@ -1,6 +1,6 @@
 use bincode;
 use enigo::{
-    Direction::{self, Press, Release},
+    Direction,
     Enigo, Key, Keyboard, Settings,
 };
 use ktroll::{KeyEvent, KeyEventType};
