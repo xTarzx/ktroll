@@ -10,6 +10,7 @@ fn main() {
     thread::sleep(time::Duration::from_secs(5));
 
     enigo.key(Key::Shift, Direction::Press);
+    thread::sleep(time::Duration::from_millis(400));
     enigo.key( Key::Unicode('a'), Direction::Press);
 
     enigo.key(Key::Shift, Direction::Release);
