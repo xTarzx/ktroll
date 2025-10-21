@@ -7,19 +7,22 @@ use tokio::{io::AsyncWriteExt, net::TcpStream, sync::mpsc};
 async fn main() -> anyhow::Result<()> {
     let addr = "192.168.1.142:46969";
     let mut stream = TcpStream::connect(addr).await?;
-    //
+
+    println!("connected to {}", addr);
+
     let (tx, mut rx) = mpsc::channel::<KeyEvent>(256);
 
     tokio::spawn(async move {
         while let Some(ev) = rx.recv().await {
+            println!("{:?}", ev);
             let mut buf = [0u8; 100];
             let len =
-                bincode::encode_into_slice(ev, &mut buf, bincode::config::standard()).unwrap(); 
+                bincode::encode_into_slice(ev, &mut buf, bincode::config::standard()).unwrap();
 
-            let buf = &buf[..len];
+            println!("len: {}", len);
 
             let _ = stream.write_u32(len as u32);
-            let _ = stream.write_all(buf).await;
+            let _ = stream.write_all(&buf[..len]).await;
             let _ = stream.flush();
         }
     });
@@ -38,7 +41,6 @@ async fn main() -> anyhow::Result<()> {
         };
 
         if let Some(ev) = key_event {
-            println!("{:?}", ev);
             let _ = tx.try_send(ev);
         }
     };

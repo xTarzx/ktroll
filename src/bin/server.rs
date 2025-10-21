@@ -9,7 +9,9 @@ async fn main() -> anyhow::Result<()> {
 
     let (mut socket, addr) = listener.accept().await?;
 
-    let mut enigo = Enigo::new(&Settings::default()).unwrap();
+    println!("connection from {}", addr);
+
+    //let mut enigo = Enigo::new(&Settings::default()).unwrap();
 
     loop {
         let mut len_buf = [0u8; 4];
@@ -18,8 +20,12 @@ async fn main() -> anyhow::Result<()> {
         }
 
         let len = u32::from_be_bytes(len_buf) as usize;
+
+        println!("len: {}", len);
         let mut payload = vec![0u8; len];
         socket.read_exact(&mut payload).await?;
+
+        println!("payload received");
 
         let key_event: KeyEvent = bincode::decode_from_slice(&payload, bincode::config::standard())
             .unwrap()
