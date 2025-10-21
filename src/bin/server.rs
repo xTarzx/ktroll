@@ -1,6 +1,9 @@
 use bincode;
-use enigo::{Enigo, Settings};
-use ktroll::KeyEvent;
+use enigo::{
+    Direction::{self, Press, Release},
+    Enigo, Key, Keyboard, Settings,
+};
+use ktroll::{KeyEvent, KeyEventType};
 use tokio::{io::AsyncReadExt, net::TcpListener};
 
 #[tokio::main]
@@ -13,7 +16,7 @@ async fn main() -> anyhow::Result<()> {
 
     println!("connection from {}", addr);
 
-    //let mut enigo = Enigo::new(&Settings::default()).unwrap();
+    let mut enigo = Enigo::new(&Settings::default()).unwrap();
 
     loop {
         let len = socket.read_u32().await;
@@ -35,6 +38,20 @@ async fn main() -> anyhow::Result<()> {
             .0;
 
         println!("{:?}", key_event);
+
+        let dir = match key_event.event_type {
+            KeyEventType::KeyPress => Direction::Press,
+            KeyEventType::KeyRelease => Direction::Release,
+        };
+
+        let key = match key_event.key.as_str() {
+            "KeyA" => Some(Key::A),
+            _ => None,
+        };
+
+        if let Some(key) = key {
+            enigo.key(key, dir).unwrap();
+        }
     }
 
     Ok(())

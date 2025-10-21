@@ -1,5 +1,5 @@
 use bincode;
-use ktroll::KeyEvent;
+use ktroll::{KeyEvent, KeyEventType};
 use rdev::{Event, EventType, listen};
 use tokio::{io::AsyncWriteExt, net::TcpStream, sync::mpsc};
 
@@ -30,11 +30,11 @@ async fn main() -> anyhow::Result<()> {
     let callback = move |event: Event| {
         let key_event = match &event.event_type {
             EventType::KeyPress(key) => Some(KeyEvent {
-                event_type: "KeyPress".to_string(),
+                event_type: KeyEventType::KeyPress,
                 key: format!("{:?}", key),
             }),
             EventType::KeyRelease(key) => Some(KeyEvent {
-                event_type: "KeyRelease".to_string(),
+                event_type: KeyEventType::KeyRelease,
                 key: format!("{:?}", key),
             }),
             _ => None,
